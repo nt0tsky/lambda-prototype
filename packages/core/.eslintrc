@@ -1,0 +1,44 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "max-len": ["error", { "code": 120, "tabWidth": 2 }],
+    "indent": ["error", 2],
+    "import/no-unresolved": 0,
+    "no-shadow": 1,
+    "prefer-const": 1,
+    "import/prefer-default-export": 0,
+    "import/extensions": ["error", "never"],
+    "implicit-arrow-linebreak": ["error", "below"],
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": {
+        "delimiter": "none",
+        "requireLast": false
+      }
+    }],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "interface",
+        "format": ["PascalCase"]
+      }
+    ],
+    "@typescript-eslint/camelcase": 0,
+    "class-methods-use-this": 0,
+    "semi": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "quotes": [2, "single", "avoid-escape"],
+    "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement", "default"],
+    "no-restricted-exports": 0,
+    "import/no-extraneous-dependencies": 0,
+    "@typescript-eslint/no-empty-interface": 0
+  }
+}

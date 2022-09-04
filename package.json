@@ -1,0 +1,27 @@
+{
+  "name": "lambda-prototype",
+  "version": "1.0.0",
+  "description": "lambda-prototype",
+  "private": true,
+  "scripts": {
+    "start:infra": "docker-compose -f ./deploy/datasources-compose.yml up",
+    "start:ingestion:dev": "lerna run start:dev --stream --scope message-ingestion"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nt0tsky/lambda-prototype.git"
+  },
+  "author": "Nikita Totskiy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nt0tsky/lambda-prototype/issues"
+  },
+  "homepage": "https://github.com/nt0tsky/lambda-prototype#readme",
+  "dependencies": {
+    "lerna": "^5.5.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "src/*"
+  ]
+}
