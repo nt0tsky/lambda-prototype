@@ -4,6 +4,7 @@ services:
   lambda-zookeeper:
     container_name: lambda-zookeeper
     image: wurstmeister/zookeeper:latest
+    restart: always
     ports:
       - 2181:2181
 
@@ -47,43 +48,46 @@ services:
       - CLICKHOUSE_SERVERS=http://lambda-clickhouse:8123
 
   lambda-consumer:
-    container_name: lambda-consumer
     build:
       dockerfile: Dockerfile
       context: .
     restart: always
     environment:
-      - NODE_ID=1
       - BROKERS=lambda-kafka:9092
+    deploy:
+      mode: replicated
+      replicas: 3
     command: ["yarn", "start:consumer"]
     depends_on:
       - lambda-kafka
 
   lambda-consumer-speed:
-    container_name: lambda-consumer-speed
     build:
       dockerfile: Dockerfile
       context: .
     restart: always
     environment:
-      - NODE_ID=1
       - BROKERS=lambda-kafka:9092
       - REDIS_URL=lambda-redis:6379
+    deploy:
+      mode: replicated
+      replicas: 3
     command: ["yarn", "start:consumer:speed"]
     depends_on:
       - lambda-kafka
 
   lambda-consumer-batch:
-    container_name: lambda-consumer-batch
     build:
       dockerfile: Dockerfile
       context: .
     restart: always
     environment:
-      - NODE_ID=1
       - BROKERS=lambda-kafka:9092
       - REDIS_URL=lambda-redis:6379
-      - CLICKHOUSE_URL=lambda-clickhouse:8124
+      - CLICKHOUSE_URL=http://lambda-clickhouse-bulk:8124
+    deploy:
+      mode: replicated
+      replicas: 3
     command: ["yarn", "start:consumer:batch"]
     depends_on:
       - lambda-kafka
@@ -95,7 +99,6 @@ services:
       context: .
     restart: always
     environment:
-      - NODE_ID=1
       - BROKERS=lambda-kafka:9092
       - REDIS_URL=lambda-redis:6379
       - PORT=6000

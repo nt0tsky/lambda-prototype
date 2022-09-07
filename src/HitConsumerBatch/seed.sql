@@ -1,7 +1,4 @@
-SET date_time_input_format = 'best_effort';
-
 CREATE DATABASE IF NOT EXISTS lambda;
-
 CREATE TABLE IF NOT EXISTS lambda.hits (
   date DateTime,
   url String,

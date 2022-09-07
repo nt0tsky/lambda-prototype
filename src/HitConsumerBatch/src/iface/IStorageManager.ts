@@ -10,6 +10,8 @@ export interface IHitStatsDTO {
 }
 
 export interface IStorageManager {
+  // for internal usage
+  query: (data: string) => Promise<void>
   addHit: (data: IHitDTO) => Promise<void>
   statsByDate: (where: IHitFilter) => Promise<IHitStatsDTO[]>
 }

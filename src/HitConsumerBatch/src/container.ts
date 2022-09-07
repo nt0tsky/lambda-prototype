@@ -12,13 +12,13 @@ interface IServiceContainerOptions {
   serviceName: string
   clickhouseUrl: string
   redisUrl: string
-  nodeId: number
+  hostname: string
   brokers: string[]
 }
 
 export const createServiceContainer = ({
   serviceName,
-  nodeId,
+  hostname,
   brokers,
   clickhouseUrl,
   redisUrl
@@ -26,7 +26,7 @@ export const createServiceContainer = ({
   const container = createContainer<IServiceCradle>({
     injectionMode: 'PROXY'
   })
-  const clientId = `${serviceName}:${nodeId}`
+  const clientId = `${serviceName}:${hostname}`
 
   container.register({
     serviceName: asValue(serviceName),

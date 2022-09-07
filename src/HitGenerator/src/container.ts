@@ -5,7 +5,7 @@ import { IServiceCradle } from './iface'
 
 interface IServiceContainerOptions {
   serviceName: string
-  nodeId: number
+  hostname: string
   brokers: string[]
   sendInterval: number
 }
@@ -13,13 +13,13 @@ interface IServiceContainerOptions {
 export const createServiceContainer = ({
   serviceName,
   brokers,
-  nodeId,
+  hostname,
   sendInterval
 }: IServiceContainerOptions): AwilixContainer<IServiceCradle> => {
   const container = createContainer<IServiceCradle>({
     injectionMode: 'PROXY'
   })
-  const clientId = `${serviceName}:${nodeId}`
+  const clientId = `${serviceName}:${hostname}`
 
   container.register({
     serviceName: asValue(serviceName),

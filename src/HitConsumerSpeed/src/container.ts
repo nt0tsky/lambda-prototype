@@ -9,14 +9,14 @@ import { createHandler } from './infra/handler'
 
 interface IServiceContainerOptions {
   serviceName: string
-  nodeId: number
+  hostname: string
   brokers: string[]
   redisUrl: string
 }
 
 export const createServiceContainer = ({
   serviceName,
-  nodeId,
+  hostname,
   brokers,
   redisUrl
 }: IServiceContainerOptions): AwilixContainer<IServiceCradle> => {
@@ -24,7 +24,7 @@ export const createServiceContainer = ({
     injectionMode: 'PROXY'
   })
 
-  const clientId = `${serviceName}:${nodeId}`
+  const clientId = `${serviceName}:${hostname}`
 
   container.register({
     serviceName: asValue(serviceName),

@@ -1,4 +1,5 @@
 import { config } from 'dotenv'
+import { hostname } from 'os'
 import { createServiceContainer } from '../src/container'
 import { createService } from '../src/service'
 
@@ -8,7 +9,7 @@ const bootstrap = async () => {
   const container = createServiceContainer({
     serviceName: 'hitGenerator',
     brokers: process.env?.BROKERS?.split(',') || [],
-    nodeId: Number(process.env.NODE_ID) || 1,
+    hostname: hostname(),
     sendInterval: Number(process.env.SEND_INTERVAL) || 3000
   })
 

@@ -57,4 +57,8 @@ export class ClickHouseManager implements IStorageManager {
 
     return data
   }
+
+  public query = async (data: string): Promise<void> => {
+    await this.httpService.post('/', data)
+  }
 }
