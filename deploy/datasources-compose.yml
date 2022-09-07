@@ -18,6 +18,30 @@ services:
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_ZOOKEEPER_CONNECT: lambda-zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092
-      KAFKA_CREATE_TOPICS: message-ingestion:3:1
+      KAFKA_CREATE_TOPICS: hit-consumer:3:1,hit-consumer-speed:3:1,hit-consumer-batch:3:1
     depends_on:
       - lambda-zookeeper
+
+  lambda-redis:
+    container_name: lambda-redis
+    image: redis:6
+    restart: always
+    ports:
+      - 6379:6379
+
+  lambda-clickhouse:
+    container_name: lambda-clickhouse
+    image: lunalabsltd/clickhouse-server:21.7.2.7-arm
+    restart: always
+    ports:
+      - 8123:8123
+      - 9000:9000
+
+  lambda-clickhouse-bulk:
+    container_name: lambda-clickhouse-bulk
+    image: nikepan/clickhouse-bulk:latest
+    restart: always
+    ports:
+      - 8124:8124
+    environment:
+      - CLICKHOUSE_SERVERS=http://lambda-clickhouse:8123

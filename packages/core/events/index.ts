@@ -1,2 +1,1 @@
-export { MessageTopics } from './topics'
-export { MessageEventDTO } from './MessageEventDTO'
+export { HitEvents } from './topics'

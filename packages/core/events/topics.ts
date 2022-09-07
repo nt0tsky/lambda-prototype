@@ -1,5 +1,7 @@
-enum MessageTopics {
-  MESSAGE_INGESTION = 'message-ingestion'
+enum HitEvents {
+  HIT_RECEIVED = 'hit-received',
+  HIT_RECEIVED_SPEED = 'hit-received-speed',
+  HIT_RECEIVED_BATCH = 'hit-received-batch'
 }
 
-export { MessageTopics }
+export { HitEvents }
