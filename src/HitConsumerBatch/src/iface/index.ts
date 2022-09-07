@@ -1,2 +1,2 @@
 export { IServiceCradle } from './IServiceCradle'
-export { IStorageManager } from './IStorageManager'
+export { IStorageManager, IHitFilter, IHitStatsDTO } from './IStorageManager'

@@ -1,7 +1,7 @@
 import { HitEvents } from '@lambda/core/events'
 import { Logger } from '@lambda/core/infra/logger'
 import { IEventProducer } from '@lambda/core/iface'
-import { ICounterView, IHitDTO } from '@lambda/core/models'
+import { IHitDTO } from '@lambda/core/models'
 import { ICacheManager } from '@lambda/core/services'
 import { NextFunction } from 'express'
 import { IServiceCradle } from '../../iface'
@@ -31,10 +31,10 @@ export class HitsController extends BaseController {
     this.wrap(async () => {
       if (!req.query.date) throw new Error('date is required in format YYYY-MM-DD')
 
-      const date = String(+new Date(req.query.date))
-      const view = await this.cacheManager.get<ICounterView>(date)
+      const date = new Date(req.query.date).toISOString().split('T')[0]
+      const total = await this.cacheManager.get<number>(date)
 
-      return res.json({ date, total: view?.total ?? 0 })
+      return res.json({ date, total: total ?? 0 })
     }, next)
 
   public addHit = async (
