@@ -5,7 +5,11 @@
   "private": true,
   "scripts": {
     "start:infra": "docker-compose -f ./deploy/datasources-compose.yml up",
-    "start:ingestion:dev": "lerna run start:dev --stream --scope message-ingestion"
+    "start:consumer": "lerna run start:dev --stream --scope hit-consumer",
+    "start:consumer:speed": "lerna run start:dev --stream --scope hit-consumer-speed",
+    "start:consumer:batch": "lerna run start:dev --stream --scope hit-consumer-batch",
+    "start:service": "lerna run start:dev --stream --scope hit-service",
+    "start:generator": "lerna run start:dev --stream --scope hit-generator"
   },
   "repository": {
     "type": "git",

@@ -5,7 +5,7 @@ import { IServiceCradle } from '../../iface'
 export const createHandler = ({
   logger, storageManager, cacheManager
 }: IServiceCradle): EventConsumerHandler<IHitDTO> => {
-  const isFraudHitLongAnalysis = (data: IHitDTO): Promise<boolean> => {
+  const isFraudHitLongSQLAnalysis = (data: IHitDTO): Promise<boolean> => {
     const isFraud = (): boolean =>
       (!!Math.floor(Math.random() * 2))
 
@@ -32,7 +32,7 @@ export const createHandler = ({
   const analyzeHitAndUpdate = async (model: IHitDTO): Promise<void> => {
     const key = createCacheKey(model)
     const value = await cacheManager.get<IHitDTO>(key)
-    const isFraud = await isFraudHitLongAnalysis(model)
+    const isFraud = await isFraudHitLongSQLAnalysis(model)
 
     // sign hit as fraud or not
     await cacheManager.add<boolean>(JSON.stringify(model), isFraud)
