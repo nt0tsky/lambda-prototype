@@ -1,5 +1,5 @@
 import { createLogger } from '@lambda/core/infra/logger'
-import { HitCacheManager, RedisCacheManager } from '@lambda/core/services'
+import { RedisCacheManager } from '@lambda/core/services'
 import {
   createContainer, asValue, AwilixContainer, asClass
 } from 'awilix'
